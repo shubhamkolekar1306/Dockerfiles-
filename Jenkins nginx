@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install and Deploy NGINX') {
+            steps {
+                sh '''
+                    sudo apt update -y
+                    sudo apt install nginx -y
+                    echo "Hello! NGINX is installed via Jenkins pipeline." | sudo tee /var/www/html/index.html
+                    sudo systemctl restart nginx
+                '''
+            }
+        }
+    }
+}
